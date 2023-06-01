@@ -142,3 +142,6 @@ public_dns:
 
 # Set the cri-o registry policy to pull images even from untrasted registries.
 overwrite_container_policy: false
+
+# A place where openshift-dns corefile will be stored and changed.
+coredns_config_dir: "~{{ ansible_user }}/coredns-configs"
