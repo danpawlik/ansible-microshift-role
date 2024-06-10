@@ -43,15 +43,18 @@ microshift_version: 4.14
 
 # Default settings from /etc/microshift/config.yaml.default
 # https://github.com/openshift/microshift/blob/release-4.14/packaging/microshift/config.yaml
-microshift_config: {}
-#  apiServer:
-#    advertiseAddress: ""
-#    subjectAltNames:
-#      - ""
-#  debugging:
-#    logLevel: Normal
-#  dns:
-#    baseDomain: example.com
+microshift_config:
+  apiServer:
+    advertiseAddress: "{{ ansible_default_ipv4.address }}"
+    subjectAltNames:
+      - "{{ fqdn }}"
+  node:
+    hostnameOverride: "{{ fqdn }}"
+    nodeIP: "{{ ansible_default_ipv4.address }}"
+  debugging:
+    logLevel: Normal
+  dns:
+    baseDomain: "{{ fqdn }}"
 #  etcd:
 #    memoryLimitMB: 0
 #  manifests:
@@ -66,9 +69,6 @@ microshift_config: {}
 #    serviceNetwork:
 #      - 10.43.0.0/16
 #    serviceNodePortRange: 30000-32767
-#  node:
-#    hostnameOverride: ""
-#    nodeIP: ""
 
 # Default settings from /etc/microshift/lvmd.yaml.default
 # https://github.com/openshift/microshift/blob/release-4.14/packaging/microshift/lvmd.yaml
